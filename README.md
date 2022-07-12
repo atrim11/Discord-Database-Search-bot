@@ -1,1 +1,1 @@
-# Discord-Database-Search-bot-
+# Discord-Database-Search-bot
