@@ -73,20 +73,19 @@ let answer = await lib.googlesheets.query['@0.3.0'].select({
   }
 });
 
-console.log('Answer ' + answer.rows[0].fields.Question + ' ' + answer.rows[0].fields.Answer)
-console.log(answer.rows.length);
+
 
 if (!answer.rows.length) {
   await lib.discord.channels['@0.3.0'].messages.create({
     channel_id: `${context.params.event.channel_id}`,
     content: [
-      `I couldn't find any answers matching the query **${question}**.`,
-      `Try running **!help** again to see a list of questions I can answer!`
+      `I couldn't find any answers matching the query **${question}**.`
     ].join('\n')
   });
   return;
 } 
-
+console.log('Answer ' + answer.rows[0].fields.Question + ' ' + answer.rows[0].fields.Answer)
+console.log(answer.rows.length);
   for (let i = 0; i < answer.rows.length; i++) {
     await lib.discord.channels['@0.3.0'].messages.create({
       channel_id: `${context.params.event.channel_id}`,
