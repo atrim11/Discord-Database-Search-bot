@@ -86,6 +86,15 @@ if (!answer.rows.length) {
 } 
 console.log('Answer ' + answer.rows[0].fields.Question + ' ' + answer.rows[0].fields.Answer)
 console.log(answer.rows.length);
+if (answer.rows.length > 5) {
+  await lib.discord.channels['@0.3.0'].messages.create({
+    channel_id: `${context.params.event.channel_id}`,
+    content: [
+      `There are too many with **${question}** in the name please try and be more specific.`
+    ].join('\n')
+  });
+  return;
+}
   for (let i = 0; i < answer.rows.length; i++) {
     await lib.discord.channels['@0.3.0'].messages.create({
       channel_id: `${context.params.event.channel_id}`,
