@@ -86,16 +86,16 @@ if (!answer.rows.length) {
 } 
 console.log('Answer ' + answer.rows[0].fields.Question + ' ' + answer.rows[0].fields.Answer)
 console.log(answer.rows.length);
-if (answer.rows.length > 5) {
-  await lib.discord.channels['@0.3.0'].messages.create({
-    channel_id: `${context.params.event.channel_id}`,
-    content: [
-      `There are too many with **${question}** in the name please try and be more specific.`
-    ].join('\n')
-  });
-  return;
-}
-  for (let i = 0; i < answer.rows.length; i++) {
+for (let i = 0; i < answer.rows.length; i++) {
+    if (i >= 4) {
+      await lib.discord.channels['@0.3.0'].messages.create({
+        channel_id: `${context.params.event.channel_id}`,
+        content: [
+          `There are too many with **${question}** in the name please try and be more specific.`
+        ].join('\n')
+      });
+      return;
+    } else {
     await lib.discord.channels['@0.3.0'].messages.create({
       channel_id: `${context.params.event.channel_id}`,
       content:'',
@@ -107,6 +107,7 @@ if (answer.rows.length > 5) {
         }]
       }
     });
+    }
   }
 
   
