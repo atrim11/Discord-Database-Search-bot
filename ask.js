@@ -73,7 +73,17 @@ let answer = await lib.googlesheets.query['@0.3.0'].select({
   }
 });
 
-
+if (!answer.rows.length) {
+  await lib.googlesheets.query['@0.3.0'].insert({
+    range: `E:E`,
+    fieldsets: [
+      {
+        'Missing': question
+      }
+    ]
+  });
+  console.log("working");
+}
 
 if (!answer.rows.length) {
   await lib.discord.channels['@0.3.0'].messages.create({
