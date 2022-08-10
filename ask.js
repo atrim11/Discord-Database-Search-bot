@@ -30,7 +30,6 @@ let frequencyQuery = await lib.googlesheets.query["@0.3.0"].distinct({
 });
 
 let frequency = parseInt(frequencyQuery.distinct.values[0]);
-console.log("frequency " + parseInt(frequencyQuery.distinct.values[0]));
 if (frequencyQuery.distinct.values[0] === "") {
   await lib.googlesheets.query["@0.3.0"].update({
     range: `A:C`,
@@ -81,7 +80,6 @@ if (!answer.rows.length) {
       },
     ],
   });
-  console.log("working");
 }
 
 if (!answer.rows.length) {
@@ -100,7 +98,6 @@ console.log(
     " " +
     answer.rows[0].fields.Answer
 );
-console.log(answer.rows.length);
 for (let i = 0; i < answer.rows.length; i++) {
   if (i >= 4) {
     await lib.discord.channels["@0.3.0"].messages.create({
